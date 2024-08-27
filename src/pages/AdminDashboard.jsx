@@ -46,6 +46,7 @@ const AdminDashboard = () => {
           .from('posts')
           .update({ title, content })
           .eq('id', editingPost.id)
+          .eq('author_id', user.id)  // Ensure the post belongs to the current user
           .select();
 
         if (error) throw error;
@@ -162,19 +163,21 @@ const AdminDashboard = () => {
               Author: {post.profiles?.username || 'Unknown'} | 
               Date: {new Date(post.created_at).toLocaleDateString()}
             </p>
-            <button
-              onClick={() => handleEdit(post)}
-              className="bg-yellow-500 text-white px-2 py-1 rounded-md mr-2 hover:bg-yellow-400 transition duration-300"
-            >
-              Edit
-            </button>
             {post.author_id === user.id && (
-              <button
-                onClick={() => handleDelete(post.id)}
-                className="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-400 transition duration-300"
-              >
-                Delete
-              </button>
+              <>
+                <button
+                  onClick={() => handleEdit(post)}
+                  className="bg-yellow-500 text-white px-2 py-1 rounded-md mr-2 hover:bg-yellow-400 transition duration-300"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(post.id)}
+                  className="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-400 transition duration-300"
+                >
+                  Delete
+                </button>
+              </>
             )}
           </div>
         ))}

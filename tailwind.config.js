@@ -18,9 +18,12 @@ module.exports = {
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out',
         'slide-in': 'slideIn 0.5s ease-out',
-        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'morph': 'morphing 15s ease-in-out infinite',
-        'float': 'floating 20s ease-in-out infinite alternate',
+        'color-change': 'colorChange 8s ease-in-out infinite',
+        'float': 'float 3s ease-in-out infinite',
+        'color-change-1': 'colorChange1 10s ease-in-out infinite',
+        'color-change-2': 'colorChange2 12s ease-in-out infinite',
+        'color-change-3': 'colorChange3 14s ease-in-out infinite',
+        'color-change-4': 'colorChange4 16s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -31,20 +34,32 @@ module.exports = {
           '0%': { transform: 'translateY(20px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
-        pulse: {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.5' },
+        colorChange: {
+          '0%, 100%': { color: '#3498db' },
+          '25%': { color: '#2ecc71' },
+          '50%': { color: '#e74c3c' },
+          '75%': { color: '#f39c12' },
         },
-        morphing: {
-          '0%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' },
-          '50%': { borderRadius: '30% 60% 70% 40% / 50% 60% 30% 60%' },
-          '100%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' }
         },
-        floating: {
-          '0%': { transform: 'translate(0, 0) rotate(0deg)' },
-          '50%': { transform: 'translate(100px, 100px) rotate(180deg)' },
-          '100%': { transform: 'translate(0, 0) rotate(360deg)' },
+        colorChange1: {
+          '0%, 100%': { backgroundColor: 'rgba(52, 152, 219, 0.3)' },
+          '50%': { backgroundColor: 'rgba(155, 89, 182, 0.3)' }
         },
+        colorChange2: {
+          '0%, 100%': { backgroundColor: 'rgba(46, 204, 113, 0.3)' },
+          '50%': { backgroundColor: 'rgba(241, 196, 15, 0.3)' }
+        },
+        colorChange3: {
+          '0%, 100%': { backgroundColor: 'rgba(231, 76, 60, 0.3)' },
+          '50%': { backgroundColor: 'rgba(52, 152, 219, 0.3)' }
+        },
+        colorChange4: {
+          '0%, 100%': { backgroundColor: 'rgba(243, 156, 18, 0.3)' },
+          '50%': { backgroundColor: 'rgba(46, 204, 113, 0.3)' }
+        }
       },
     },
   },
