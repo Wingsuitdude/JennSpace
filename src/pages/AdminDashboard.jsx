@@ -94,7 +94,8 @@ const AdminDashboard = () => {
       const { error: postError } = await supabase
         .from('posts')
         .delete()
-        .eq('id', id);
+        .eq('id', id)
+        .eq('author_id', user.id);  // Ensure the post belongs to the current user
 
       if (postError) throw postError;
 
@@ -167,12 +168,14 @@ const AdminDashboard = () => {
             >
               Edit
             </button>
-            <button
-              onClick={() => handleDelete(post.id)}
-              className="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-400 transition duration-300"
-            >
-              Delete
-            </button>
+            {post.author_id === user.id && (
+              <button
+                onClick={() => handleDelete(post.id)}
+                className="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-400 transition duration-300"
+              >
+                Delete
+              </button>
+            )}
           </div>
         ))}
       </div>
