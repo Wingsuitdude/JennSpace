@@ -5,6 +5,7 @@ import CommentSection from '../components/CommentSection';
 
 const Blog = () => {
   const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
@@ -23,12 +24,21 @@ const Blog = () => {
     } else {
       setPost(data);
     }
+    setLoading(false); // Ensure loading state is updated
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <div className="text-2xl text-green-400 animate-pulse">Loading...</div>
+      </div>
+    );
+  }
 
   if (!post) {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <div className="text-2xl text-green-400 animate-pulse">Loading...</div>
+        <div className="text-2xl text-red-400">Post not found</div>
       </div>
     );
   }
@@ -40,7 +50,7 @@ const Blog = () => {
           <div className="p-8">
             <h1 className="text-4xl font-bold mb-4 text-green-400">{post.title}</h1>
             <p className="text-blue-300 mb-6">
-              By {post.profiles.username} on {new Date(post.created_at).toLocaleDateString()}
+              By {post.profiles?.username || 'Unknown Author'} on {new Date(post.created_at).toLocaleDateString()}
             </p>
             <div className="prose prose-lg prose-invert max-w-none">
               {post.content.split('\n').map((paragraph, index) => (

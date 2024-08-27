@@ -81,3 +81,7 @@
       }
     }
   }
+
+  body {
+    background-color: #111827; /* This is the color for bg-gray-900 */
+  }
